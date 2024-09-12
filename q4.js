@@ -31,7 +31,7 @@ function somaFibonacciPares() {
     }
     [a, b] = [b, a + b];
   }
-  return soma;
+  return soma1;
   // Implemente coa função que calcula a soma dos termos pares de Fibonacci
 }
 
