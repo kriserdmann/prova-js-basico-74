@@ -20,7 +20,6 @@
  */
 
 function ehPar(numero) {
-  if (typeof numero !== 'number' || !Number.isInteger(numero)) {
   // Implemente a função que verifica se um número é par
 }
 
