@@ -1,0 +1,21 @@
+name: Disparar Testes
+
+on: [push]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.TEST_REPO_TOKEN}}
+          script: |
+            github.rest.repos.createDispatchEvent({
+              owner: 'seu-usuario-github',
+              repo: 'prova-js-basico-74-testes',
+              event_type: 'run-tests',
+              client_payload: {
+                repository: context.repo.owner + '/' + context.repo.repo,
+                sha: context.sha
+              }
+            })
