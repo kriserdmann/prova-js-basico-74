@@ -20,7 +20,10 @@
  */
 
 function ehPar(numero) {
-  // Implemente a função que verifica se um número é par
+  if (typeof numero !== 'number' || !Number.isInteger(numero)) {
+    return null;
+  }
+  return numero % 2 === 0;
 }
 
 module.exports = ehPar;
