@@ -21,7 +21,10 @@
  */
 
 function somaFibonacciPares() {
-  // Implemente a função que calcula a soma dos termos pares de Fibonacci
+  let a = 0,
+    b = 1,
+    soma = 0;
+  // Implemente coa função que calcula a soma dos termos pares de Fibonacci
 }
 
 module.exports = somaFibonacciPares;
