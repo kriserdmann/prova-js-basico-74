@@ -10,9 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Acionar workflow de testes
-        uses: peter-evans/repository-dispatch@v2
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: kriserdmann/prova-js-basico-74-testes
-          event-type: run-tests
-          client-payload: '{"repository": "${{ github.repository }}", "sha": "${{ github.sha }}"}'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: 'kriserdmann',
+              repo: 'prova-js-basico-74-testes',
+              event_type: 'run-tests',
+              client_payload: {
+                repository: context.repo.full_name,
+                sha: context.sha
+              }
+            });
