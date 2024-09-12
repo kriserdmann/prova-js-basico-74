@@ -11,7 +11,7 @@ jobs:
           github-token: ${{secrets.TEST_REPO_TOKEN}}
           script: |
             github.rest.repos.createDispatchEvent({
-              owner: 'seu-usuario-github',
+              owner: 'kriserdmann',
               repo: 'prova-js-basico-74-testes',
               event_type: 'run-tests',
               client_payload: {
