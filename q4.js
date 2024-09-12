@@ -24,6 +24,14 @@ function somaFibonacciPares() {
   let a = 0,
     b = 1,
     soma = 0;
+
+  while (b <= 50000) {
+    if (b % 2 === 0) {
+      soma += b;
+    }
+    [a, b] = [b, a + b];
+  }
+  return soma;
   // Implemente coa função que calcula a soma dos termos pares de Fibonacci
 }
 
