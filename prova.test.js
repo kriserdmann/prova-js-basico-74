@@ -48,109 +48,173 @@ let resultados = [];
     resultados.push({ questao: 4, score: (result === 60696) * 0.5 });
   });
 
-  test('Q5: Manipulação de Array de Linguagens', () => {
-    const result = manipulacaoArrayLinguagens();
-    const expectedArray = [
-      'Rust',
-      'Python',
-      'TypeScript',
-      'Go',
-      'Java',
-      'C++',
-      'Ruby',
-    ];
-    const arrayCheck = result.arrayFinal.every(
-      (elem, index) => elem === expectedArray[index],
-    );
-    const lengthCheck = result.tamanhoArray === 7;
-    resultados.push({ questao: 5, score: arrayCheck && lengthCheck ? 1 : 0 });
-  });
+  /**
+ * Teste para a Questão 5: Manipulação de Array de Linguagens de Programação
+ *
+ * Este teste verifica se a função manipulacaoArrayLinguagens executa corretamente
+ * todas as operações especificadas no array de linguagens de programação e retorna
+ * os resultados esperados para cada operação.
+ */
+test('Q5: Manipulação de Array de Linguagens', () => {
+  const result = manipulacaoArrayLinguagens();
+  const expectedFinalArray = ['Rust', 'Python', 'TypeScript', 'Go', 'Java', 'C++', 'Ruby'];
+  const expectedVersoes = [2010, 1991, 2012, 2009, 1995, 1985, 1995];
+  const expectedModernas = [ 'Rust', 'TypeScript', 'Go' ];
 
-  test('Q6: Manipulação de Objeto de Livro', () => {
-    const livro = manipulacaoObjeto();
+  // Verificação do array final após todas as modificações
+  const finalArrayCheck = result.linguagensFinal.every((elem, index) => elem === expectedFinalArray[index]);
 
-    const idadeEsperada = new Date().getFullYear() - 1992;
-    const descricaoEsperada =
-      'O livro "O Alquimista" foi escrito por "Paulo Coelho" e publicado em "1992".';
+  // Verificação do tamanho do array
+  const lengthCheck = result.tamanhoArray === 7;
 
-    // Calcula a pontuação baseada em todas as verificações
-    let pontuacao =
-      livro.titulo === 'O Alquimista' &&
-      livro.autor === 'Paulo Coelho' &&
-      livro.anoPublicacao === 1992 &&
-      livro.editora === 'Rocco' &&
-      livro.getIdade() === idadeEsperada &&
-      livro.getDescricao() === descricaoEsperada
-        ? 1
-        : 0;
+  // Verificação do array de versões
+  const versoesCheck = result.versoes.every((elem, index) => elem === expectedVersoes[index]);
+
+  // Verificação do array de linguagens modernas
+  const modernasCheck = result.modernas.every((elem, index) => elem === expectedModernas[index]);
+
+  // Cálculo da pontuação: cada parte correta contribui proporcionalmente para a pontuação total de 1.5
+  const partialScore = (finalArrayCheck + lengthCheck + versoesCheck + modernasCheck) / 4;
+  const score = 1.5 * partialScore;
+
+  // Adiciona o resultado ao array de resultados com o formato padrão
+  resultados.push({ questao: 5, score: score });
+
+  // Impressões de console para visualização do teste
+  console.log(`Array Final: ${finalArrayCheck ? 'Correto' : 'Incorreto'}`);
+  console.log(`Tamanho do Array: ${lengthCheck ? 'Correto' : 'Incorreto'}`);
+  console.log(`Versões: ${versoesCheck ? 'Correto' : 'Incorreto'}`);
+  console.log(`Modernas: ${modernasCheck ? 'Correto' : 'Incorreto'}`);
+});
+
+  
+    test('Q6: Manipulação de Objeto de Livro', () => {
+      const livro = manipulacaoObjeto();
+  
+      const idadeEsperada = new Date().getFullYear() - 1992;
+      const descricaoEsperada =
+        'O livro "O Alquimista" foi escrito por "Paulo Coelho" e publicado em "1992".';
+  
+      // Calcula a pontuação baseada em todas as verificações
+      let pontuacao =
+        livro.titulo === 'O Alquimista' &&
+        livro.autor === 'Paulo Coelho' &&
+        livro.anoPublicacao === 1992 &&
+        livro.editora === 'Rocco' &&
+        livro.getIdade() === idadeEsperada &&
+        livro.getDescricao() === descricaoEsperada
+          ? 1.5
+          : 0;
+  
+      // Adiciona o resultado ao array de resultados com o formato padrão
+      resultados.push({ questao: 6, score: pontuacao });
+    });
+  
+  
+  test('Q7: Deve encontrar elementos comuns entre dois arrays', () => {
+    const array1 = [1, 2, 3, 4, 5, 10, 15, 16];
+    const array2 = [3, 4, 5, 6, 7, 15, 24];
+    const resultadoEsperado = [3, 4, 5, 15];
+
+    const resultado = elementosComuns(array1, array2);
+
+    // Verifica se o resultado é igual ao esperado
+    expect(resultado).toEqual(expect.arrayContaining(resultadoEsperado));
+    expect(resultado).toHaveLength(resultadoEsperado.length);
 
     // Adiciona o resultado ao array de resultados com o formato padrão
-    resultados.push({ questao: 6, score: pontuacao });
-  });
+    resultados.push({ questao: 7, score: (resultado.length === resultadoEsperado.length) ? 1 : 0 });
 
-  test('Q7: Elementos Comuns', () => {
-    const result = elementosComuns(['a', 'b'], ['b', 'c']);
-    resultados.push({ questao: 7, score: result.includes('b') * 1 });
-  });
+    // Imprime resultados para a depuração, se necessário
+    console.log(`Questão 7: ${(resultado.length === resultadoEsperado.length) ? 'Aprovado' : 'Reprovado'} - Pontuação: ${(resultado.length === resultadoEsperado.length) ? 0.5 : 0}`);
+});
 
   test('Q8: Encontrar caracteres duplicados em uma string', () => {
     const resultado = encontrarDuplicados('programacao web e mobile');
     const esperado = { r: 2, o: 3, a: 3, m: 2, ' ': 3, e: 3, b: 2 };
 
-    // Verifica se todas as chaves esperadas estão presentes e se os valores são corretos
     const allKeysMatch = Object.keys(esperado).every(
       (key) =>
         resultado.hasOwnProperty(key) && resultado[key] === esperado[key],
     );
-
-    // Verifica se o número de chaves em ambos os objetos é o mesmo
     const correctKeyLength =
       Object.keys(resultado).length === Object.keys(esperado).length;
-
-    // Pontuação baseada em todas as verificações corretas
     const pontuacao = allKeysMatch && correctKeyLength ? 1 : 0;
-
     resultados.push({ questao: 8, score: pontuacao });
   });
 
   test('Q9: Objeto Estudante', () => {
     const estudante = criarEstudante();
-    const mediaCorreta =
-      (estudante.nota1 + estudante.nota2 + estudante.nota3) / 3;
-    const partialScore =
-      estudante.nome &&
-      estudante.idade &&
-      estudante.media() === mediaCorreta &&
-      estudante.situacao() === (mediaCorreta >= 7 ? 'Aprovado' : 'Reprovado');
-    resultados.push({ questao: 9, score: partialScore * 2 });
+    
+    // Verificação das propriedades iniciais
+    const propriedadesCorretas = !!estudante.nome && !!estudante.idade && typeof estudante.nota1 === 'number' && typeof estudante.nota2 === 'number' && typeof estudante.nota3 === 'number';
+  
+    // Cálculo da média das notas
+    const mediaCalculada = estudante.media();
+    const mediaEsperada = (estudante.nota1 + estudante.nota2 + estudante.nota3) / 3;
+    const mediaCheck = mediaCalculada === mediaEsperada;
+  
+    // Verificação da situação do estudante
+    const situacaoCalculada = estudante.situacao();
+    const situacaoEsperada = mediaEsperada >= 7 ? 'Aprovado' : 'Reprovado';
+    const situacaoCheck = situacaoCalculada === situacaoEsperada;
+  
+    // Cálculo da pontuação: cada parte correta contribui proporcionalmente para a pontuação total de 1
+    const partialScore = (propriedadesCorretas + mediaCheck + situacaoCheck) / 3;
+    const score = 1 * partialScore; // Alterar para o peso da questão, se necessário
+  
+    // Evitar NaN, garantindo que a pontuação seja um número
+    const finalScore = isNaN(score) ? 0 : score;
+  
+    // Adiciona o resultado ao array de resultados com o formato padrão
+    resultados.push({ questao: 9, score: finalScore });
+  
+    // Impressões de console para visualização do teste
+    console.log('Questão 9');
+    console.log(`Propriedades: ${propriedadesCorretas ? 'Corretas' : 'Incorretas'}`);
+    console.log(`Média: ${mediaCheck ? 'Correta' : 'Incorreta'}`);
+    console.log(`Situação: ${situacaoCheck ? 'Correta' : 'Incorreta'}`);
   });
+  
+/**
+ * Teste para a Questão 10: Manipulação de Array de Números
+ *
+ * Este teste verifica se a função manipularArray executa corretamente todas as operações especificadas
+ * no array de números e retorna os resultados esperados para cada operação.
+ */
+test('Q10: Manipulação de Array de Números', () => {
+  const numeros = [1, 2, 3, 4, 5];
+  const resultado = manipularArray(numeros);
 
-  describe('Q10: Manipulação de Array de Números', () => {
-    test('Verifica a manipulação correta do array e cálculos resultantes', () => {
-      const numeros = [1, 2, 3, 4, 5];
-      const resultado = manipularArray(numeros);
-  
-      // Verifica se o array original não foi alterado
-      expect(resultado.arrayOriginal).toEqual([1, 2, 3, 4, 5]);
-  
-      // Supondo agora que a cópia do array deveria ser alterada conforme as operações descritas
-      expect(resultado.arrayCopia).toEqual([1, 2, 3, 4, 5]); // Após adicionar 0 e 10, e remover o primeiro e último elementos.
-  
-      // Verifica se a soma dos números no arrayCopia é calculada corretamente
-      expect(resultado.soma).toBe(15);
-  
-      // Verifica se o maior número no arrayCopia é identificado corretamente
-      expect(resultado.maiorNumero).toBe(5);
-  
-      // Verifica se o array de números pares no arrayCopia está correto
-      expect(resultado.numerosPares).toEqual([2, 4]);
-  
-      // Adiciona o resultado ao array de resultados com o formato padrão
-      const pontuacao = (resultado.soma === 9 && resultado.maiorNumero === 4) ? 1 : 0;
-      resultados.push({ questao: 10, score: pontuacao });
-    });
-  });
-  
+  // Verificação da cópia do array após todas as operações
+  const expectedArrayCopia = [ 0, 2, 3, 4, 10 ];
+  const arrayCopiaCheck = resultado.arrayCopia.every((elem, index) => elem === expectedArrayCopia[index]);
+
+  // Verificação da soma dos números no array copia
+  const somaCheck = resultado.soma === 19; // 2 + 3 + 4
+
+  // Verificação do maior número no array copia
+  const maiorNumeroCheck = resultado.maiorNumero === 10;
+
+  // Verificação do array de números pares
+  const expectedNumerosPares = [ 0, 2, 4, 10 ];
+  const numerosParesCheck = resultado.numerosPares.every((elem, index) => elem === expectedNumerosPares[index]);
+
+  // Cálculo da pontuação: cada parte correta contribui proporcionalmente para a pontuação total de 2
+  const partialScore = (arrayCopiaCheck + somaCheck + maiorNumeroCheck + numerosParesCheck) / 4;
+  const score = 2 * partialScore;
+
+  // Adiciona o resultado ao array de resultados com o formato padrão
+  resultados.push({ questao: 10, score: score });
+
+  // Impressões de console para visualização do teste
+  console.log('Questão 10');
+  console.log(`Array Copia: ${arrayCopiaCheck ? 'Correto' : 'Incorreto'}`);
+  console.log(`Soma: ${somaCheck ? 'Correta' : 'Incorreta'}`);
+  console.log(`Maior Número: ${maiorNumeroCheck ? 'Correto' : 'Incorreto'}`);
+  console.log(`Números Pares: ${numerosParesCheck ? 'Corretos' : 'Incorretos'}`);
+});
+
 
 
 afterAll(() => {

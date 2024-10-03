@@ -38,11 +38,4 @@ function encontrarDuplicados(str) {
   return duplicados;
 }
 
-// Exemplo de uso conforme o enunciado
-const resultado = encontrarDuplicados('programacao web e mobile');
-console.log(resultado);
-// Espera-se que imprima algo como:
-// {
-//   { r: 2, o: 3, a: 3, m: 2, ' ': 3, e: 3, b: 2 }
-
 module.exports = encontrarDuplicados;

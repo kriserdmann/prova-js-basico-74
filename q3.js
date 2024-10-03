@@ -29,7 +29,7 @@
  * Fizz
  * 13
  * 14
- * FizzBuzz
+ * assim sucessivamente até 100
  */
 
 function fizzBuzz() {

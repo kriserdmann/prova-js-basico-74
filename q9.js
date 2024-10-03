@@ -23,9 +23,9 @@ function criarEstudante() {
   const estudante = {
     nome: 'João Silva',
     idade: 20,
-    nota1: 8,
-    nota2: 7.5,
-    nota3: 6.5,
+    nota1: 10,
+    nota2: 10,
+    nota3: 10,
 
     // Método para calcular a média das notas
     media: function () {
@@ -40,12 +40,5 @@ function criarEstudante() {
 
   return estudante;
 }
-
-// Exemplo de uso conforme o enunciado
-const estudante = criarEstudante();
-console.log(`Nome: ${estudante.nome}`);
-console.log(`Idade: ${estudante.idade}`);
-console.log(`Média: ${estudante.media().toFixed(2)}`);
-console.log(`Situação: ${estudante.situacao()}`);
 
 module.exports = criarEstudante;

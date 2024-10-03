@@ -6,7 +6,8 @@
  *
  * Requisitos:
  * a) Crie uma cópia do array original.
- * b) Adicione o número 0 no início da cópia do array.
+ * b) Remova o primeiro e o último elemento da cópia do array.
+ * c) Adicione o número 0 no início da cópia do array.
  * c) Adicione o número 10 no final da cópia do array.
  * d) Remova o primeiro e o último elemento da cópia do array.
  * e) Calcule a soma de todos os números na cópia do array.
@@ -19,7 +20,6 @@
  * console.log(resultado);
  * // Deve imprimir algo como:
  * // {
- * //   arrayOriginal: [1, 2, 3, 4, 5],
  * //   arrayCopia: [ 1, 2, 3, 4, 5 ],
  * //   soma: 15,
  * //   maiorNumero: 5,
@@ -30,15 +30,15 @@ function manipularArray(numeros) {
   // a) Cria uma cópia do array original
   const arrayCopia = [...numeros];
 
-  // b) Adiciona o número 0 no início da cópia do array
+  // b) Remove o primeiro e o último elemento da cópia do array
+    arrayCopia.shift();
+    arrayCopia.pop();
+
+  // c) Adiciona o número 0 no início da cópia do array
   arrayCopia.unshift(0);
 
-  // c) Adiciona o número 10 no final da cópia do array
+  // d) Adiciona o número 10 no final da cópia do array
   arrayCopia.push(10);
-
-  // d) Remove o primeiro e o último elemento da cópia do array
-  arrayCopia.shift();
-  arrayCopia.pop();
 
   // e) Calcula a soma de todos os números na cópia do array
   const soma = arrayCopia.reduce((acc, num) => acc + num, 0);

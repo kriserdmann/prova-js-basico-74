@@ -15,9 +15,6 @@
  * Os primeiros termos da sequência são: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
  * Os termos pares são: 2, 8, 34, ...
  * A soma dos termos pares que não excedem 50.000 deve ser calculada.
- *
- * Dica: Use um loop while para gerar os termos da sequência até que um termo
- * exceda 50.000, e vá somando os termos pares encontrados.
  */
 
 function somaFibonacciPares() {
